@@ -1,0 +1,8 @@
+.camps {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    text-align: center;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: white;
+    color: transparent;
+    background-color: #a61d2a;
+}
