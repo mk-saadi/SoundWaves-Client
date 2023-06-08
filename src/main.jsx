@@ -7,6 +7,8 @@ import Home from "./component/home/Home";
 import Login from "./component/auth/Login";
 import Register from "./component/auth/Register";
 import AuthProvider from "./component/authProvider/AuthProvider";
+import Dashboard from "./component/dashboard/Dashboard";
+import AdminHome from "./component/dashboard/admin/AdminHome";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +26,16 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
+            },
+        ],
+    },
+    {
+        path: "dashboard",
+        element: <Dashboard />,
+        children: [
+            {
+                path: "admin",
+                element: <AdminHome />,
             },
         ],
     },

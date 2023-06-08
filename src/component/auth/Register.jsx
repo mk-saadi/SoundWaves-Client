@@ -2,10 +2,8 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -105,7 +103,8 @@ const Register = () => {
                         {/* name */}
                         <TextField
                             margin="normal"
-                            required
+                            inputProps={{ required: true }}
+                            required={true}
                             fullWidth
                             label="Your Name"
                             name="name"
@@ -115,7 +114,7 @@ const Register = () => {
                         {/* photoURL */}
                         <TextField
                             margin="normal"
-                            required
+                            inputProps={{ required: true }}
                             fullWidth
                             label="Your Profile Picture"
                             name="photoURL"
@@ -125,7 +124,7 @@ const Register = () => {
                         {/* email */}
                         <TextField
                             margin="normal"
-                            required
+                            inputProps={{ required: true }}
                             fullWidth
                             label="Email Address"
                             name="email"
@@ -136,7 +135,7 @@ const Register = () => {
                         {/* password */}
                         <TextField
                             margin="normal"
-                            required
+                            inputProps={{ required: true }}
                             fullWidth
                             name="password"
                             label="Password"

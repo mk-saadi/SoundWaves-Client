@@ -11,10 +11,6 @@ import Menu from "@mui/material/Menu";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import { toast } from "react-hot-toast";
-// import PersonAdd from "@mui/icons-material/PersonAdd";
-// import Settings from "@mui/icons-material/Settings";
-// import Logout from "@mui/icons-material/Logout";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -32,15 +28,7 @@ const NavBar = () => {
         logOut()
             .then(() => {})
             .catch((error) => {
-                toast.error(error.message, {
-                    position: "top-center",
-                    autoClose: 4000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                console.log(error.message);
             });
     };
 
@@ -162,16 +150,9 @@ const NavBar = () => {
                                     alt=""
                                     className="h-9 w-auto btn-circle"
                                 />{" "}
-                                Profile
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>
-                                <Avatar /> My account
+                                {user?.displayName}
                             </MenuItem>
                             <Divider />
-                            <MenuItem onClick={handleClose}>
-                                <ListItemIcon>{/* <PersonAdd fontSize="small" /> */}</ListItemIcon>
-                                Add another account
-                            </MenuItem>
                             <MenuItem onClick={handleClose}>
                                 <ListItemIcon>{/* <Settings fontSize="small" /> */}</ListItemIcon>
                                 Settings
@@ -184,7 +165,9 @@ const NavBar = () => {
                         </Menu>
                     </>
                 ) : (
-                    <button>login</button>
+                    <Link to="/login">
+                        <button>login</button>
+                    </Link>
                 )}
             </div>
         </div>
