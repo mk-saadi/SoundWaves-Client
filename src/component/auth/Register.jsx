@@ -7,13 +7,15 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../authProvider/AuthProvider";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 const Register = () => {
-    const { signUp, updateProfileInfo } = useContext(AuthContext);
+    const { signUp, updateProfileInfo, logOut, googleSignIn } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSignUp = (event) => {
         event.preventDefault();
@@ -43,6 +45,22 @@ const Register = () => {
             .then((res) => {
                 const user = res.user;
                 updateProfileInfo(name, photoURL);
+                const userDocument = {
+                    email: email,
+                    name: name,
+                    photo: photoURL,
+                };
+
+                // Send HTTP request to backend API endpoint
+                axios
+                    .post("http://localhost:12000/users", userDocument)
+                    .then((response) => {
+                        console.log("User details stored in the database:", response.data);
+                    })
+                    .catch((error) => {
+                        console.log("Error storing user details in the database:", error);
+                    });
+
                 if (user.uid) {
                     toast.success("Account successfully created", {
                         position: "top-center",
@@ -53,6 +71,8 @@ const Register = () => {
                         draggable: true,
                         progress: undefined,
                     });
+                    logOut();
+                    navigate("/login");
                 }
             })
             .catch((error) => {
@@ -65,6 +85,18 @@ const Register = () => {
                     draggable: true,
                     progress: undefined,
                 });
+            });
+    };
+
+    const handleGoogleLog = () => {
+        googleSignIn()
+            .then((result) => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                // navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                console.log(error);
             });
     };
 
@@ -165,6 +197,7 @@ const Register = () => {
                             </Grid>
                         </Grid>
                     </Box>
+                    <Button onClick={handleGoogleLog}>Google</Button>
                 </Box>
                 <Typography
                     variant="body2"

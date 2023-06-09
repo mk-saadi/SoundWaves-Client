@@ -8,8 +8,10 @@ import {
     signOut,
     updateProfile,
 } from "firebase/auth";
+// import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import app from "../../firebase/firebasr";
+import axios from "axios";
 
 const auth = getAuth(app);
 
@@ -31,7 +33,7 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     };
 
-    const googleSIgnIn = () => {
+    const googleSignIn = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
     };
@@ -52,10 +54,17 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setLoading(false);
             setUser(currentUser);
+            // get and set token
             if (currentUser) {
-                localStorage.setItem("user", JSON.stringify(currentUser));
+                axios
+                    .post("http://localhost:12000/jwt", { email: currentUser.email })
+                    .then((data) => {
+                        // console.log(data.data.token)
+                        localStorage.setItem("access-token", data.data.token);
+                        setLoading(false);
+                    });
             } else {
-                localStorage.removeItem("user");
+                localStorage.removeItem("access-token");
             }
         });
         return () => {
@@ -75,7 +84,7 @@ const AuthProvider = ({ children }) => {
         loading,
         signUp,
         signIn,
-        googleSIgnIn,
+        googleSignIn,
         logOut,
         updateProfileInfo,
     };

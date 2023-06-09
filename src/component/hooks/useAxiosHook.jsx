@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../authProvider/AuthProvider";
 
-const useAxiosSecure = () => {
+const useAxiosHook = () => {
     const { logOut } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -38,4 +38,4 @@ const useAxiosSecure = () => {
     return [axiosSecure];
 };
 
-export default useAxiosSecure;
+export default useAxiosHook;

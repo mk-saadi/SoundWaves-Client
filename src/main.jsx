@@ -9,6 +9,7 @@ import Register from "./component/auth/Register";
 import AuthProvider from "./component/authProvider/AuthProvider";
 import Dashboard from "./component/dashboard/Dashboard";
 import AdminHome from "./component/dashboard/admin/AdminHome";
+import ManageClass from "./component/dashboard/admin/ManageClass";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: "admin",
                 element: <AdminHome />,
+            },
+            {
+                path: "manageClass",
+                element: <ManageClass />,
             },
         ],
     },
