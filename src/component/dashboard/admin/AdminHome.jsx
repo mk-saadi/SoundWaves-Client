@@ -1,30 +1,25 @@
-// import { useQuery } from "@tanstack/react-query";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import useAxiosHook from "../../hooks/useAxiosHook";
 import { toast } from "react-hot-toast";
-import { useEffect, useState } from "react";
-import { FaUserShield } from "react-icons/fa";
-
-// const queryClient = new QueryClient();
+import { useContext, useEffect, useState } from "react";
+// import { FaUserShield } from "react-icons/fa";
+import { AuthContext } from "../../authProvider/AuthProvider";
 
 const AdminHome = () => {
     const [axiosSecure] = useAxiosHook();
-    // const { data: users = [], refetch } = useQuery(["users"], async () => {
-    //     const res = await axiosSecure.get("/users");
-    //     return res.data;
-    // });
-    const { data: users = [], refetch } = useQuery(["users"], async () => {
-        const res = await axiosSecure.get("/users");
-        return res.data;
-    });
+    const [users, setUsers] = useState([]);
+    const { user } = useContext(AuthContext);
+    // const navigate = useNavigate();
+    console.log(user);
 
-    // const [users, setUsers] = useState([]);
-
-    // useEffect(() => {
-    //     fetch("http://localhost:12000/users")
-    //         .then((response) => response.json())
-    //         .then((data) => setUsers(data));
-    // }, []);
+    useEffect(() => {
+        axiosSecure
+            .get("/users")
+            .then((res) => res.data)
+            .then((data) => setUsers(data))
+            .catch((error) => {
+                console.log("Error fetching users:", error);
+            });
+    }, []);
 
     const handleMakeAdmin = (user) => {
         fetch(`http://localhost:12000/users/admin/${user._id}`, {
@@ -34,8 +29,9 @@ const AdminHome = () => {
             .then((data) => {
                 console.log(data);
                 if (data.modifiedCount) {
+                    alert(`${user.name} is now an Admin`);
                     // refetch();
-                    toast.success(`${user.name} is an Admin Now!`, {
+                    toast.success("is an Admin Now!", {
                         position: "top-center",
                         autoClose: 4000,
                         hideProgressBar: false,
@@ -44,33 +40,97 @@ const AdminHome = () => {
                         draggable: true,
                         progress: undefined,
                     });
+                    // Update the user's role locally
+                    setUsers((prevUsers) =>
+                        prevUsers.map((u) => (u._id === user._id ? { ...u, role: "admin" } : u))
+                    );
+                }
+            });
+    };
+
+    const handleMakeInstructor = (user) => {
+        fetch(`http://localhost:12000/users/instructor/${user._id}`, {
+            method: "PATCH",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    toast.success("Account successfully created", {
+                        position: "top-center",
+                        autoClose: 4000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    // Update the user's role locally
+                    setUsers((prevUsers) =>
+                        prevUsers.map((u) =>
+                            u._id === user._id ? { ...u, role: "instructor" } : u
+                        )
+                    );
                 }
             });
     };
 
     return (
         <>
-            <div className="bg-gray-600">
-                <p>admin page</p>
+            <div className="bg-gray-600 max-w-[1366px]">
                 <div>
-                    {users.map((user) => (
-                        <div
-                            key={user._id}
-                            className="flex justify-between mx-10 gap-2 "
-                        >
-                            <p>{user.name}</p>
-                            {user.role === "admin" ? (
-                                "admin"
-                            ) : (
-                                <button
-                                    onClick={() => handleMakeAdmin(user)}
-                                    className="btn btn-info   text-white my-2"
-                                >
-                                    <FaUserShield></FaUserShield>
-                                </button>
-                            )}
-                        </div>
-                    ))}
+                    <div className="overflow-x-auto max-w-[1366px]">
+                        <table className="table table-zebra text-gray-300 max-w-[1366px]">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th className="text-accent text-base">#</th>
+                                    <th className="text-accent text-base">Name</th>
+                                    <th className="text-accent text-base">Email</th>
+                                    <th className="text-accent text-base">Promote To Admin</th>
+                                    <th className="text-accent text-base">Promote To Instructor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* row 1 */}
+                                {users.map((user, index) => (
+                                    <tr key={user._id}>
+                                        <th>{index + 1}</th>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td className="text-white">
+                                            {user.role === "admin" ? (
+                                                <p className="text-white text-base font-semibold bg-blue-400 w-fit  rounded-full py-1 px-4">
+                                                    Admin
+                                                </p>
+                                            ) : (
+                                                <button
+                                                    onClick={() => handleMakeAdmin(user)}
+                                                    className="btn btn-sm rounded-full btn-error   text-white"
+                                                >
+                                                    Admin?
+                                                </button>
+                                            )}
+                                        </td>
+                                        <td className="text-white">
+                                            {user.role === "instructor" ? (
+                                                <p className="text-white text-base font-semibold bg-blue-400 w-fit  rounded-full py-1 px-4">
+                                                    Instructor
+                                                </p>
+                                            ) : (
+                                                <button
+                                                    onClick={() => handleMakeInstructor(user)}
+                                                    className="btn btn-sm rounded-full btn-info   text-white"
+                                                >
+                                                    Instructor?
+                                                </button>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </>

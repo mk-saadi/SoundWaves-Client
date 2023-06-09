@@ -8,7 +8,6 @@ import {
     signOut,
     updateProfile,
 } from "firebase/auth";
-// import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import app from "../../firebase/firebasr";
 import axios from "axios";
@@ -73,7 +72,7 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
+        const storedUser = localStorage.getItem("users");
         if (storedUser) {
             setUser(JSON.parse(storedUser));
         }
