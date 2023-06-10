@@ -1,0 +1,11 @@
+.drawer-content {
+    position: relative;
+}
+
+.label-vertical {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 100%;
+}

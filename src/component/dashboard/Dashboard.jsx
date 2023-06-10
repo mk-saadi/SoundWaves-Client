@@ -1,6 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import useInstructor from "../hooks/useInstructor";
 import useAdmin from "../hooks/useAdmin";
+import { BsArrowRightCircleFill } from "react-icons/bs";
+import "./dashboard.css";
+import { HiUsers } from "react-icons/hi";
+import { SiGoogleclassroom } from "react-icons/si";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
@@ -16,28 +20,63 @@ const Dashboard = () => {
             <div className="drawer-content flex flex-col">
                 <label
                     htmlFor="my-drawer-2"
-                    className="btn btn-accent rounded-full btn-sm drawer-button lg:hidden w-1/4"
+                    className="bg-accent flex justify-center items-center text-white px-2 cursor-pointer rounded-none drawer-button lg:hidden label-vertical z-40"
                 >
-                    Open drawer
+                    <BsArrowRightCircleFill />
                 </label>
-                <Outlet></Outlet>
+                <div className="ml-10 md:ml-0 sm:ml-10">
+                    <Outlet></Outlet>
+                </div>
             </div>
-            <div className="drawer-side">
+
+            <div className="drawer-side z-50">
                 <label
                     htmlFor="my-drawer-2"
                     className="drawer-overlay"
                 ></label>
-                <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-                    <ul>
-                        <li>home</li>
-                        {isAdmin ? (
-                            <li>show admin routes</li>
-                        ) : isInstructor ? (
-                            <li>show instructor routes</li>
-                        ) : (
-                            <li>show user routes</li>
-                        )}
-                    </ul>
+                <ul className="menu w-56 bg-accent-focus text-gray-700 font-semibold h-full border-r-4 border-gray-300">
+                    {isAdmin ? (
+                        <>
+                            <li className="rounded-none">
+                                <NavLink
+                                    to="/dashboard/adminClass"
+                                    className="bg-transparent"
+                                >
+                                    <button className="flex justify-start items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full">
+                                        <SiGoogleclassroom className="text-2xl" />
+                                        Manage Class
+                                    </button>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/admin"
+                                    className="bg-transparent"
+                                >
+                                    <button className="flex justify-start items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full">
+                                        <HiUsers className="text-2xl" />
+                                        Manage Users
+                                    </button>
+                                </NavLink>
+                            </li>
+                        </>
+                    ) : isInstructor ? (
+                        <NavLink
+                            to="/dashboard/instructorHome"
+                            className="bg-transparent"
+                        >
+                            <button className="flex justify-evenly items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full">
+                                <SiGoogleclassroom className="text-2xl" />
+                                Add a Class
+                            </button>
+                        </NavLink>
+                    ) : (
+                        <li>show user routes</li>
+                    )}
+                    <div className="flex flex-col w-full">
+                        <div className="divider"></div>
+                    </div>
+                    <li>home</li>
 
                     {/* Sidebar content here */}
                 </ul>
@@ -47,34 +86,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-// {isAdmin && (
-//     <>
-//         <li>
-//             <Link to="/dashboard/admin">Admin Dashboard</Link>
-//         </li>
-//         <li>
-//             <Link to="/admin/users">Manage Users</Link>
-//         </li>
-//         {/* Add more admin-specific links */}
-//     </>
-// )}
-// {isInstructor && (
-//     <>
-//         <li>
-//             <Link to="/dashboard/manageClass">Instructor Dashboard</Link>
-//         </li>
-//         <li>
-//             <Link to="/instructor/courses">Manage Courses</Link>
-//         </li>
-//         {/* Add more instructor-specific links */}
-//     </>
-// )}
-// {/* Add links for general users */}
-// <li>
-//     <Link to="/dashboard">Dashboard</Link>
-// </li>
-// <li>
-//     <Link to="/profile">Profile</Link>
-// </li>
-// {/* Add more general user links */}

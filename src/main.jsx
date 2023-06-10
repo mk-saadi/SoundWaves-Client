@@ -11,6 +11,9 @@ import Dashboard from "./component/dashboard/Dashboard";
 import AdminHome from "./component/dashboard/admin/AdminHome";
 import ManageClass from "./component/dashboard/admin/ManageClass";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AdminRoutes from "./routes/AdminRoutes";
+import Instructor from "./component/dashboard/instructor/Instructor";
+import InstructorRoutes from "./routes/InstructorRoutes";
 
 const queryClient = new QueryClient();
 
@@ -39,11 +42,27 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "admin",
-                element: <AdminHome />,
+                element: (
+                    <AdminRoutes>
+                        <AdminHome />
+                    </AdminRoutes>
+                ),
             },
             {
-                path: "manageClass",
-                element: <ManageClass />,
+                path: "adminClass",
+                element: (
+                    <AdminRoutes>
+                        <ManageClass />
+                    </AdminRoutes>
+                ),
+            },
+            {
+                path: "instructorHome",
+                element: (
+                    <InstructorRoutes>
+                        <Instructor />
+                    </InstructorRoutes>
+                ),
             },
         ],
     },

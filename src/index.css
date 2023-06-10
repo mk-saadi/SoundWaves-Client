@@ -5,3 +5,10 @@
 html {
     font-family: "Montserrat", sans-serif;
 }
+
+.drawer-side a.active {
+    color: white;
+}
+.drawer-side a {
+    background-color: transparent;
+}

@@ -1,7 +1,7 @@
 const Instructor = () => {
     return (
         <div>
-            {/* make instructor only path */} <p>p</p>
+            <p>add a class</p>
         </div>
     );
 };
