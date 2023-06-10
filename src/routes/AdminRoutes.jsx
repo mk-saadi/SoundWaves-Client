@@ -12,7 +12,7 @@ const AdminRoutes = ({ children }) => {
     if (loading || isAdminLoading) {
         return (
             <div className="flex items-center justify-center h-screen">
-                <span className="loading loading-ring  h-32 w-32"></span>
+                <span className="loading loading-bars  md:h-52 h-32 md:w-52 w-32"></span>
             </div>
         );
     }

@@ -3,7 +3,7 @@ import useInstructor from "../hooks/useInstructor";
 import useAdmin from "../hooks/useAdmin";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import "./dashboard.css";
-import { HiUsers } from "react-icons/hi";
+import { HiHome, HiUsers } from "react-icons/hi";
 import { SiGoogleclassroom } from "react-icons/si";
 
 const Dashboard = () => {
@@ -37,48 +37,64 @@ const Dashboard = () => {
                 <ul className="menu w-56 bg-accent-focus text-gray-700 font-semibold h-full border-r-4 border-gray-300">
                     {isAdmin ? (
                         <>
-                            <li className="rounded-none">
-                                <NavLink
-                                    to="/dashboard/adminClass"
-                                    className="bg-transparent"
-                                >
-                                    <button className="flex justify-start items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full">
-                                        <SiGoogleclassroom className="text-2xl" />
-                                        Manage Class
-                                    </button>
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/dashboard/admin"
-                                    className="bg-transparent"
-                                >
-                                    <button className="flex justify-start items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full">
-                                        <HiUsers className="text-2xl" />
-                                        Manage Users
-                                    </button>
-                                </NavLink>
-                            </li>
+                            <NavLink
+                                to="/dashboard/adminClass"
+                                className="bg-transparent my-2"
+                            >
+                                <button className="flex justify-start items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full border-l-4">
+                                    <SiGoogleclassroom className="text-2xl" />
+                                    Manage Class
+                                </button>
+                            </NavLink>
+
+                            <NavLink
+                                to="/dashboard/admin"
+                                className="bg-transparent my-2"
+                            >
+                                <button className="flex justify-start items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full border-l-4">
+                                    <HiUsers className="text-2xl" />
+                                    Manage Users
+                                </button>
+                            </NavLink>
                         </>
                     ) : isInstructor ? (
-                        <NavLink
-                            to="/dashboard/instructorHome"
-                            className="bg-transparent"
-                        >
-                            <button className="flex justify-evenly items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full">
-                                <SiGoogleclassroom className="text-2xl" />
-                                Add a Class
-                            </button>
-                        </NavLink>
+                        <>
+                            <NavLink
+                                to="/dashboard/instructorHome"
+                                className="bg-transparent my-2"
+                            >
+                                <button className="flex justify-evenly items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full border-l-4">
+                                    <SiGoogleclassroom className="text-2xl" />
+                                    Add a Class
+                                </button>
+                            </NavLink>
+                            <NavLink
+                                to="/dashboard/myClasses"
+                                className="bg-transparent my-2"
+                            >
+                                <button className="flex justify-evenly items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full border-l-4">
+                                    <SiGoogleclassroom className="text-2xl" />
+                                    My Classes
+                                </button>
+                            </NavLink>
+                        </>
                     ) : (
                         <li>show user routes</li>
                     )}
+
                     <div className="flex flex-col w-full">
                         <div className="divider"></div>
                     </div>
-                    <li>home</li>
 
-                    {/* Sidebar content here */}
+                    <NavLink
+                        to="/"
+                        className="bg-transparent"
+                    >
+                        <button className="flex justify-start items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full">
+                            <HiHome className="text-2xl" />
+                            Home
+                        </button>
+                    </NavLink>
                 </ul>
             </div>
         </div>

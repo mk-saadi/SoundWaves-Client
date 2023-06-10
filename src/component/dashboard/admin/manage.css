@@ -1,0 +1,9 @@
+.border-gradient {
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    /* padding: 4px; */
+    background-image: linear-gradient(to right, #facc15, #ca8a04);
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    /* background-size: 200% 100%; */
+}

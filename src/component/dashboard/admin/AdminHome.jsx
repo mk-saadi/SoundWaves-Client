@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../authProvider/AuthProvider";
 import { RiAdminFill, RiUser2Fill } from "react-icons/ri";
+import "./manage.css";
 
 const AdminHome = () => {
     const [axiosSecure] = useAxiosHook();
@@ -89,7 +90,7 @@ const AdminHome = () => {
                         <img
                             src={user.photoURL}
                             alt=""
-                            className="w-28 h-auto rounded-full border-2 p-1 border-accent-focus drop-shadow-md ml-8"
+                            className="w-28 h-auto rounded-full p-1 drop-shadow-md ml-8  border-gradient"
                         />
                         <div>
                             <p className="text-gray-300">Name: {user.displayName}</p>
@@ -133,7 +134,7 @@ const AdminHome = () => {
                                 <td>{user.email}</td>
                                 <td className="text-white">
                                     {user.role === "admin" ? (
-                                        <p className="text-white md:text-xs text-xs font-semibold bg-blue-400 w-fit  rounded-full py-1 px-4 flex items-center gap-2">
+                                        <p className="text-white md:text-xs text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 w-fit  rounded-full py-1 px-4 flex items-center gap-2 cursor-not-allowed select-none">
                                             <RiAdminFill className="text-white text-sm" />
                                             Admin
                                         </p>
@@ -148,7 +149,7 @@ const AdminHome = () => {
                                 </td>
                                 <td className="text-white">
                                     {user.role === "instructor" ? (
-                                        <p className="text-white md:text-xs text-xs font-semibold bg-blue-400 w-fit  rounded-full py-1 px-4 flex items-center gap-2">
+                                        <p className="text-white md:text-xs text-xs font-semibold bg-gradient-to-r from-sky-400 to-sky-600 w-fit  rounded-full py-1 px-4 flex items-center gap-2 cursor-not-allowed select-none">
                                             <RiUser2Fill className="text-white text-sm" />
                                             Instructor
                                         </p>
