@@ -15,7 +15,7 @@ const PopularClass = () => {
                 console.error("Error fetching popular classes:", error);
             });
     }, []);
-    // console.log(popularClasses);
+    console.log(popularClasses);
 
     // axios("http://localhost:12000/classes");
 

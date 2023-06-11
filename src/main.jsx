@@ -16,8 +16,9 @@ import Instructor from "./component/dashboard/instructor/Instructor";
 import InstructorRoutes from "./routes/InstructorRoutes";
 import PrivateRoute from "./routes/PrivateRoute";
 import MyClasses from "./component/dashboard/instructor/MyClasses";
-import UserRoutes from "./routes/UserRoutes";
 import SelectedClass from "./component/dashboard/user/SelectedClass";
+import AllClasses from "./component/extra/AllClasses";
+import FamousInstructor from "./component/extra/FamousInstructor";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
+            },
+            {
+                path: "/allClasses",
+                element: <AllClasses />,
+            },
+            {
+                path: "/famousInstructor",
+                element: <FamousInstructor />,
             },
         ],
     },
@@ -82,11 +91,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "selectedClass",
-                element: (
-                    <UserRoutes>
-                        <SelectedClass />
-                    </UserRoutes>
-                ),
+                element: <SelectedClass />,
             },
         ],
     },

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Banner from "./hComponents/Banner";
 import PopularClass from "./hComponents/PopularClass";
 import PopularInstructor from "./hComponents/PopularInstructor";
@@ -25,6 +26,9 @@ const Home = () => {
                     and unlock your musical potential!
                 </p>
                 <PopularClass />
+                <Link to="/allClasses">
+                    <button>View All Classes</button>
+                </Link>
             </div>
             <div className="mb-8 mx-8">
                 <h2 className="text-4xl mb-3 text-gray-300 font-bold">Popular Instructors</h2>
