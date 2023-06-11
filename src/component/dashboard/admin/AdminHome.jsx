@@ -8,6 +8,8 @@ import "./manage.css";
 const AdminHome = () => {
     const [axiosSecure] = useAxiosHook();
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     const { user } = useContext(AuthContext);
     // const navigate = useNavigate();
     const [adminCount, setAdminCount] = useState(0);
@@ -15,6 +17,7 @@ const AdminHome = () => {
     const sortedUsers = [...users];
 
     useEffect(() => {
+        setLoading(true);
         axiosSecure
             .get("/users")
             .then((res) => res.data)
@@ -22,6 +25,7 @@ const AdminHome = () => {
                 setUsers(data);
                 setAdminCount(data.filter((user) => user.role === "admin").length);
                 setInstructorCount(data.filter((user) => user.role === "instructor").length);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log("Error fetching users:", error);
@@ -126,7 +130,74 @@ const AdminHome = () => {
                 <div className="flex flex-col w-full">
                     <div className="divider"></div>
                 </div>
-                <table className="table table-zebra text-gray-300 w-full">
+                {loading ? (
+                    <div className="flex items-center justify-center h-screen">
+                        <span className="loading loading-bars  h-32 w-32"></span>
+                    </div>
+                ) : (
+                    // Show the table when loading is false
+                    <table className="table table-zebra text-gray-300 w-full">
+                        <thead>
+                            <tr>
+                                <th className="text-accent text-sm md:text-xs">#</th>
+                                <th className="text-accent text-sm md:text-xs">Name</th>
+                                <th className="text-accent text-sm md:text-xs">Email</th>
+                                <th className="text-accent text-sm md:text-xs">Promote To Admin</th>
+                                <th className="text-accent text-sm md:text-xs">
+                                    Promote To Instructor
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sortedUsers.map((user, index) => (
+                                <tr
+                                    key={user._id}
+                                    className="text-xs md:text-xs"
+                                >
+                                    <th>{index + 1}</th>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td className="text-white">
+                                        {user.role === "admin" ? (
+                                            <p className="text-white md:text-xs text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 w-fit  rounded-full py-1 px-4 flex items-center gap-2 cursor-not-allowed select-none shadow-md drop-shadow-md">
+                                                <RiAdminFill className="text-white text-sm" />
+                                                Admin
+                                            </p>
+                                        ) : (
+                                            <button
+                                                onClick={() => handleMakeAdmin(user)}
+                                                className="bg-white rounded-full text-gray-600 md:text-sm font-semibold px-4 py-px w-fit focus:scale-95 duration-150 text-xs"
+                                            >
+                                                Admin?
+                                            </button>
+                                        )}
+                                    </td>
+                                    <td className="text-white">
+                                        {user.role === "instructor" ? (
+                                            <p className="text-white md:text-xs text-xs font-semibold bg-gradient-to-r from-sky-400 to-sky-600 w-fit  rounded-full py-1 px-4 flex items-center gap-2 cursor-not-allowed select-none shadow-md drop-shadow-md">
+                                                <RiUser2Fill className="text-white text-sm" />
+                                                Instructor
+                                            </p>
+                                        ) : (
+                                            <button
+                                                disabled={user.role === "admin"}
+                                                onClick={() => handleMakeInstructor(user)}
+                                                className={`bg-white rounded-full text-gray-600 md:text-sm font-semibold px-4 py-px w-fit focus:scale-95 duration-150 text-xs ${
+                                                    user.role === "admin"
+                                                        ? "cursor-not-allowed select-none bg-gray-400"
+                                                        : ""
+                                                }`}
+                                            >
+                                                Instructor?
+                                            </button>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+                {/* <table className="table table-zebra text-gray-300 w-full">
                     <thead>
                         <tr>
                             <th className="text-accent text-sm md:text-xs">#</th>
@@ -185,7 +256,7 @@ const AdminHome = () => {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </table> */}
             </div>
         </div>
     );

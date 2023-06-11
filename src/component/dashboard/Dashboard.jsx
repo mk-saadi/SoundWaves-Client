@@ -79,7 +79,12 @@ const Dashboard = () => {
                             </NavLink>
                         </>
                     ) : (
-                        <li>show user routes</li>
+                        <NavLink to="/dashboard/selectedClass">
+                            <button className="flex justify-evenly items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full border-l-4">
+                                <SiGoogleclassroom className="text-2xl" />
+                                My Classes
+                            </button>
+                        </NavLink>
                     )}
 
                     <div className="flex flex-col w-full">

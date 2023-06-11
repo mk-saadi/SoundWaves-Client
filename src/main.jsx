@@ -16,6 +16,8 @@ import Instructor from "./component/dashboard/instructor/Instructor";
 import InstructorRoutes from "./routes/InstructorRoutes";
 import PrivateRoute from "./routes/PrivateRoute";
 import MyClasses from "./component/dashboard/instructor/MyClasses";
+import UserRoutes from "./routes/UserRoutes";
+import SelectedClass from "./component/dashboard/user/SelectedClass";
 
 const queryClient = new QueryClient();
 
@@ -76,6 +78,14 @@ const router = createBrowserRouter([
                     <InstructorRoutes>
                         <MyClasses />
                     </InstructorRoutes>
+                ),
+            },
+            {
+                path: "selectedClass",
+                element: (
+                    <UserRoutes>
+                        <SelectedClass />
+                    </UserRoutes>
                 ),
             },
         ],
