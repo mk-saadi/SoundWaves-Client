@@ -1,4 +1,3 @@
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -15,6 +14,8 @@ import axios from "axios";
 import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebookSquare, FaTwitterSquare } from "react-icons/fa";
 
 const Register = () => {
     const { signUp, updateProfileInfo, logOut, googleSignIn } = useContext(AuthContext);
@@ -115,7 +116,7 @@ const Register = () => {
             <Container
                 component="main"
                 maxWidth="xs"
-                className="min-h-screen"
+                className=" bg-sky-600 bg-opacity-60 rounded-md shadow-md my-14 py-4 "
             >
                 <CssBaseline />
                 <Box
@@ -123,24 +124,27 @@ const Register = () => {
                         marginTop: 8,
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "center",
+                        // alignItems: "center",
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                        {/* <LockOutlinedIcon /> */}
-                    </Avatar>
                     <Typography
                         component="h1"
-                        variant="h3"
+                        variant="h4"
                         color={"white"}
+                        sx={{ textAlign: "left", mb: 3, ml: 1, fontWeight: "bold" }}
+                        className="drop-shadow-md"
                     >
-                        Register
+                        {/* eslint-disable-next-line react/no-unescaped-entities */}
+                        Let's Get
+                        <br />
+                        Started!
                     </Typography>
+                    <hr />
                     <Box
                         component="form"
                         onSubmit={handleSignUp}
                         noValidate
-                        sx={{ mt: 1 }}
+                        sx={{ mt: 3 }}
                     >
                         {/* name */}
                         <TextField
@@ -152,6 +156,7 @@ const Register = () => {
                             name="name"
                             autoComplete="name"
                             autoFocus
+                            color="info"
                         />
                         {/* photoURL */}
                         <TextField
@@ -162,6 +167,7 @@ const Register = () => {
                             name="photoURL"
                             autoComplete="url"
                             autoFocus
+                            color="info"
                         />
                         {/* email */}
                         <TextField
@@ -172,6 +178,7 @@ const Register = () => {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            color="info"
                         />
 
                         {/* password */}
@@ -199,6 +206,7 @@ const Register = () => {
                                 name="password"
                                 id="outlined-adornment-password"
                                 type={showPassword ? "text" : "password"}
+                                color="info"
                                 endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
@@ -219,30 +227,45 @@ const Register = () => {
                         <Button
                             type="submit"
                             fullWidth
-                            variant="contained"
-                            color="inherit"
-                            sx={{ mt: 3, mb: 2, fontWeight: "bold" }}
+                            className="btn font-semibold bg-gradient-to-r from-sky-400 to-sky-600 w-fit  rounded-full text-white shadow-md drop-shadow-md duration-200"
+                            sx={{ mt: 3, mb: 2, color: "white", fontWeight: "bold" }}
                         >
-                            Register
+                            Sign Up
                         </Button>
+                        <div className="divider font-semibold text-white">OR</div>
+
+                        <div className="flex justify-center items-center gap-6 mb-4">
+                            <IconButton
+                                onClick={handleGoogleLog}
+                                color="primary"
+                            >
+                                <FcGoogle className="text-2xl" />
+                            </IconButton>
+                            <IconButton color="info">
+                                <FaTwitterSquare className="text-sky-500 text-2xl" />
+                            </IconButton>
+                            <IconButton color="success">
+                                <FaFacebookSquare className="text-2xl text-blue-500" />
+                            </IconButton>
+                        </div>
+
                         <Grid>
                             <Grid
                                 item
-                                className="flex justify-end"
+                                className="flex justify-center"
                             >
                                 <Link
                                     to="/login"
                                     variant="body2"
-                                    className="text-blue-500 hover:underline cursor-pointer"
+                                    className="text-gray-300 text-sm hover:underline cursor-pointer mb-4"
                                 >
                                     {"Already have an account? LogIn"}
                                 </Link>
                             </Grid>
                         </Grid>
                     </Box>
-                    <Button onClick={handleGoogleLog}>Google</Button>
                 </Box>
-                <Typography
+                {/* <Typography
                     variant="body2"
                     color="text.secondary"
                     align="center"
@@ -257,7 +280,7 @@ const Register = () => {
                     </Link>{" "}
                     {new Date().getFullYear()}
                     {"."}
-                </Typography>
+                </Typography> */}
             </Container>
         </ThemeProvider>
     );

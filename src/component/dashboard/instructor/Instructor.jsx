@@ -1,4 +1,3 @@
-import { toast } from "react-hot-toast";
 import { AuthContext } from "../../authProvider/AuthProvider";
 import { useContext } from "react";
 import { ImBoxAdd } from "react-icons/im";
@@ -18,6 +17,11 @@ const Instructor = () => {
         const instructor = form.instructor.value;
         const price = parseFloat(form.price.value);
         const seats = parseFloat(form.seats.value);
+
+        if (seats > 25) {
+            alert("The maximum number of seats allowed is 25.");
+            return;
+        }
 
         const classes = {
             className: className,
@@ -39,15 +43,8 @@ const Instructor = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data.insertedId) {
-                    toast.success("Your new Class has been successfully added.", {
-                        position: "top-center",
-                        autoClose: 2500,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    console.log(data);
+                    alert("Class added successfully.");
                 }
                 form.reset();
             });
@@ -153,11 +150,6 @@ const Instructor = () => {
                             <p>(*) marked fields are mandatory</p>
                         </div>
                     </div>
-                    {/* <input
-                        type="submit"
-                        className="absolute bottom-4 md:right-24 btn btn-info rounded-full text-white"
-                        value="Submit"
-                    /> */}
                     <div className="absolute bottom-4 md:right-24 ">
                         <div className="relative">
                             <input
@@ -165,7 +157,7 @@ const Instructor = () => {
                                 className="btn btn-info rounded-full text-white pl-8 pr-4"
                                 value="Submit"
                             />
-                            <i className="absolute bottom-4 left-4 text-white">
+                            <i className="absolute bottom-[17px] left-3 text-white">
                                 <ImBoxAdd />
                             </i>
                         </div>

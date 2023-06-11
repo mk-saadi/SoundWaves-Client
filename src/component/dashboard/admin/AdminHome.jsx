@@ -60,6 +60,7 @@ const AdminHome = () => {
             .then((data) => {
                 console.log(data);
                 if (data.modifiedCount > 0) {
+                    alert(`${user.name} is now an Instructor`);
                     toast.success("Account successfully created", {
                         position: "top-center",
                         autoClose: 4000,
@@ -90,7 +91,7 @@ const AdminHome = () => {
                         <img
                             src={user.photoURL}
                             alt=""
-                            className="w-28 h-auto rounded-full p-1 drop-shadow-md ml-8  border-gradient"
+                            className="w-28 h-auto rounded-full p-1 drop-shadow-md shadow-md ml-8  border-gradient"
                         />
                         <div>
                             <p className="text-gray-300">Name: {user.displayName}</p>
@@ -134,7 +135,7 @@ const AdminHome = () => {
                                 <td>{user.email}</td>
                                 <td className="text-white">
                                     {user.role === "admin" ? (
-                                        <p className="text-white md:text-xs text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 w-fit  rounded-full py-1 px-4 flex items-center gap-2 cursor-not-allowed select-none">
+                                        <p className="text-white md:text-xs text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 w-fit  rounded-full py-1 px-4 flex items-center gap-2 cursor-not-allowed select-none shadow-md drop-shadow-md">
                                             <RiAdminFill className="text-white text-sm" />
                                             Admin
                                         </p>
@@ -149,14 +150,19 @@ const AdminHome = () => {
                                 </td>
                                 <td className="text-white">
                                     {user.role === "instructor" ? (
-                                        <p className="text-white md:text-xs text-xs font-semibold bg-gradient-to-r from-sky-400 to-sky-600 w-fit  rounded-full py-1 px-4 flex items-center gap-2 cursor-not-allowed select-none">
+                                        <p className="text-white md:text-xs text-xs font-semibold bg-gradient-to-r from-sky-400 to-sky-600 w-fit  rounded-full py-1 px-4 flex items-center gap-2 cursor-not-allowed select-none shadow-md drop-shadow-md">
                                             <RiUser2Fill className="text-white text-sm" />
                                             Instructor
                                         </p>
                                     ) : (
                                         <button
+                                            disabled={user.role === "admin"}
                                             onClick={() => handleMakeInstructor(user)}
-                                            className="bg-white rounded-full text-gray-600 md:text-sm font-semibold px-4 py-px w-fit focus:scale-95 duration-150 text-xs"
+                                            className={`bg-white rounded-full text-gray-600 md:text-sm font-semibold px-4 py-px w-fit focus:scale-95 duration-150 text-xs ${
+                                                user.role === "admin"
+                                                    ? "cursor-not-allowed select-none bg-gray-400"
+                                                    : ""
+                                            }`}
                                         >
                                             Instructor?
                                         </button>

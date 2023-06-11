@@ -14,6 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
+    console.log(user);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
