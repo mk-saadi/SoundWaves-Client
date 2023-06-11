@@ -12,6 +12,7 @@ const AdminHome = () => {
     // const navigate = useNavigate();
     const [adminCount, setAdminCount] = useState(0);
     const [instructorCount, setInstructorCount] = useState(0);
+    const sortedUsers = [...users];
 
     useEffect(() => {
         axiosSecure
@@ -70,7 +71,6 @@ const AdminHome = () => {
                         draggable: true,
                         progress: undefined,
                     });
-                    // Update the user's role locally
                     setUsers((prevUsers) =>
                         prevUsers.map((u) =>
                             u._id === user._id ? { ...u, role: "instructor" } : u
@@ -79,6 +79,20 @@ const AdminHome = () => {
                 }
             });
     };
+
+    sortedUsers.sort((a, b) => {
+        if (a.role === "admin" && b.role !== "admin") {
+            return -1;
+        } else if (a.role !== "admin" && b.role === "admin") {
+            return 1;
+        } else if (a.role === "instructor" && b.role !== "admin" && b.role !== "instructor") {
+            return -1;
+        } else if (a.role !== "admin" && a.role !== "instructor" && b.role === "instructor") {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
 
     return (
         <div className="bg-gray-600">
@@ -125,7 +139,7 @@ const AdminHome = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user, index) => (
+                        {sortedUsers.map((user, index) => (
                             <tr
                                 key={user._id}
                                 className="text-xs md:text-xs"

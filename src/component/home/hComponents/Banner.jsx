@@ -1,25 +1,76 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./banner.css";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const Banner = () => {
+    const paragraph =
+        "Summer is the perfect time for young aspiring musicians to immerse themselves in the world of music. At our highly acclaimed summer music camp, children have the opportunity to explore their musical talents, learn new instruments, and create lifelong memories.";
+
+    const words = paragraph.split(" ");
+    const lines = [];
+    let currentLine = [];
+
+    words.forEach((word) => {
+        if (currentLine.length < 10) {
+            currentLine.push(word);
+        } else {
+            lines.push(currentLine.join(" "));
+            currentLine = [word];
+        }
+    });
+
+    if (currentLine.length > 0) {
+        lines.push(currentLine.join(" "));
+    }
+
     return (
         <div className="max-h-[500px] overflow-hidden object-cover">
             <Carousel
-                autoPlay={true}
+                // autoPlay={true}
                 infiniteLoop={true}
-                className="cursor-grab text-center"
+                className="cursor-pointer text-center"
                 swipeable={true}
                 emulateTouch={true}
-                // showArrows={false}
+                showArrows={false}
                 useKeyboardArrows={true}
             >
-                <div>
+                <div className="relative">
                     <img
                         src="https://bgcoceanside.org/wp-content/uploads/2023/04/Summer-Camp-Banner.png"
                         alt=""
                         className="w-full h-[500px] object-cover"
                     />
+                    <div className="absolute w-full bg-gradient-to-t from-[#826c00] to-transparent  bottom-0 h-full select-none pt-[25%] md:pt-[15%] px-10">
+                        <div className="drop-shadow-md">
+                            <h2 className="text-5xl lg:text-7xl font-bold text-white text-left drop-shadow-md">
+                                SoundWaves: <br />
+                                Summer Class
+                            </h2>
+                            {lines.map((line, index) => (
+                                <p
+                                    key={index}
+                                    className="text-[15px] text-white text-left"
+                                >
+                                    {line}
+                                </p>
+                            ))}
+                            <div className="flex justify-start">
+                                <Link>
+                                    <Button className="btn btn-info text-white">yoyo</Button>
+                                </Link>
+                                <Link>
+                                    <Button
+                                        className="btn font-semibold bg-gradient-to-r from-sky-400 to-sky-600 rounded-full text-white shadow-md drop-shadow-md duration-200 uppercase"
+                                        sx={{ color: "white", fontWeight: "bold" }}
+                                    >
+                                        View classes
+                                    </Button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <img
