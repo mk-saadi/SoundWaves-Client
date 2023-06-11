@@ -20,7 +20,7 @@ const Dashboard = () => {
             <div className="drawer-content flex flex-col">
                 <label
                     htmlFor="my-drawer-2"
-                    className="bg-accent flex justify-center items-center text-white px-2 cursor-pointer rounded-none drawer-button lg:hidden label-vertical z-40"
+                    className="bg-accent flex justify-center items-center text-white px-2 cursor-pointer rounded-none drawer-button lg:hidden label-vertical z-40 h-screen"
                 >
                     <BsArrowRightCircleFill />
                 </label>
@@ -34,7 +34,7 @@ const Dashboard = () => {
                     htmlFor="my-drawer-2"
                     className="drawer-overlay"
                 ></label>
-                <ul className="menu w-56 bg-accent-focus text-gray-700 font-semibold h-full border-r-4 border-gray-300">
+                <ul className="menu w-56 bg-accent-focus text-gray-700 font-semibold h-screen border-r-4 border-gray-300">
                     {isAdmin ? (
                         <>
                             <NavLink

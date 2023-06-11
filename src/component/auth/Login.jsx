@@ -1,11 +1,10 @@
+import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -13,9 +12,24 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../authProvider/AuthProvider";
 import { toast } from "react-hot-toast";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { OutlinedInput } from "@mui/material";
 
 function Login() {
     const { signIn } = useContext(AuthContext);
+
+    const [showPassword, setShowPassword] = React.useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -102,7 +116,6 @@ function Login() {
                         component="form"
                         onSubmit={handleLogin}
                         noValidate
-                        sx={{ mt: 1 }}
                     >
                         <TextField
                             margin="normal"
@@ -113,7 +126,7 @@ function Login() {
                             autoComplete="email"
                             autoFocus
                         />
-                        <TextField
+                        {/* <TextField
                             margin="normal"
                             required
                             fullWidth
@@ -121,11 +134,39 @@ function Login() {
                             label="Password"
                             type="password"
                             autoComplete="current-password"
-                        />
+                        /> */}
+                        <FormControl
+                            variant="outlined"
+                            className="w-full"
+                            sx={{ mt: 2, fontFamily: "Montserrat" }}
+                        >
+                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                            <OutlinedInput
+                                name="password"
+                                id="outlined-adornment-password"
+                                type={showPassword ? "text" : "password"}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            sx={{ color: "white" }}
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                            />
+                        </FormControl>
+
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
+                            color="inherit"
                             sx={{ mt: 3, mb: 2 }}
                         >
                             Sign In
@@ -146,7 +187,7 @@ function Login() {
                         </Grid>
                     </Box>
                 </Box>
-                <Typography
+                {/* <Typography
                     variant="body2"
                     color="text.secondary"
                     align="center"
@@ -161,7 +202,7 @@ function Login() {
                     </Link>{" "}
                     {new Date().getFullYear()}
                     {"."}
-                </Typography>
+                </Typography> */}
             </Container>
         </ThemeProvider>
     );
