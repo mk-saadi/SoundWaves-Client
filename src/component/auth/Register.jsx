@@ -64,7 +64,7 @@ const Register = () => {
                 };
 
                 axios
-                    .post("http://localhost:12000/users", userDocument)
+                    .post("https://sound-waves-taupe.vercel.app/users", userDocument)
                     .then((response) => {
                         console.log("User details stored in the database:", response.data);
                     })

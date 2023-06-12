@@ -3,6 +3,7 @@ import Banner from "./hComponents/Banner";
 import PopularClass from "./hComponents/PopularClass";
 import PopularInstructor from "./hComponents/PopularInstructor";
 import "./home.css";
+import Header from "./hComponents/Header";
 
 const Home = () => {
     return (
@@ -14,6 +15,9 @@ const Home = () => {
                 <p className="camps md:text-9xl text-6xl">
                     MUSIC CAMPS & <br /> WORKSHOPS
                 </p>
+            </div>
+            <div className="my-16 mx-8">
+                <Header />
             </div>
             <div className="my-16 mx-8">
                 <h2 className="text-4xl mb-3 text-gray-300 font-bold">Popular Classes</h2>

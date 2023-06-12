@@ -8,7 +8,7 @@ const useClasses = () => {
     } = useQuery({
         queryKey: ["classes"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:12000/classes");
+            const res = await fetch("https://sound-waves-taupe.vercel.app/classes");
             return res.json();
         },
     });

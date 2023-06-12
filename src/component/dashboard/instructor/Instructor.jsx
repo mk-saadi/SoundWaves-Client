@@ -33,7 +33,7 @@ const Instructor = () => {
         };
         console.log(classes);
 
-        fetch("http://localhost:12000/classes", {
+        fetch("https://sound-waves-taupe.vercel.app/classes", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

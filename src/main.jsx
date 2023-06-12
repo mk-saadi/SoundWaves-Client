@@ -20,6 +20,7 @@ import SelectedClass from "./component/dashboard/user/SelectedClass";
 import AllClasses from "./component/extra/AllClasses";
 import FamousInstructor from "./component/extra/FamousInstructor";
 import EnrolledClass from "./component/dashboard/user/EnrolledClass";
+import Payment from "./component/dashboard/user/Payment";
 
 const queryClient = new QueryClient();
 
@@ -43,11 +44,12 @@ const router = createBrowserRouter([
             {
                 path: "/allClasses",
                 element: <AllClasses />,
-                loader: () => fetch("http://localhost:12000/classes"),
+                loader: () => fetch("https://sound-waves-taupe.vercel.app/classes"),
             },
             {
                 path: "/famousInstructor",
                 element: <FamousInstructor />,
+                loader: () => fetch("https://sound-waves-taupe.vercel.app/users/instructor"),
             },
         ],
     },
@@ -95,16 +97,30 @@ const router = createBrowserRouter([
             // user
             {
                 path: "selectedClass",
-                element: <SelectedClass />,
+                element: (
+                    <PrivateRoute>
+                        <SelectedClass />
+                    </PrivateRoute>
+                ),
             },
             {
                 path: "enrolledClass",
-                element: <EnrolledClass />,
+                element: (
+                    <PrivateRoute>
+                        <EnrolledClass />
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: "payment/:id",
+                element: <Payment />,
+                loader: ({ params }) =>
+                    fetch(`https://sound-waves-taupe.vercel.app/selected/${params.id}`),
             },
         ],
     },
 ]);
-
+// VITE_PAYMENT_GATEWAY_PK
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <AuthProvider>

@@ -8,7 +8,7 @@ const useAxiosHook = () => {
     const navigate = useNavigate();
 
     const axiosSecure = axios.create({
-        baseURL: "http://localhost:12000",
+        baseURL: "https://sound-waves-taupe.vercel.app",
     });
 
     useEffect(() => {

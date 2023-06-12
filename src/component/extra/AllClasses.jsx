@@ -27,7 +27,7 @@ const AllClasses = () => {
         };
 
         axios
-            .post("http://localhost:12000/selected", classes)
+            .post("https://sound-waves-taupe.vercel.app/selected", classes)
             .then((response) => {
                 console.log(response);
                 alert("Class added successfully");

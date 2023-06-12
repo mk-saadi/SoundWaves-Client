@@ -6,7 +6,7 @@ const PopularInstructor = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:12000/users/instructor")
+            .get("https://sound-waves-taupe.vercel.app/users/instructor")
             .then((response) => {
                 setInstructor(response.data);
                 console.log(response.data);

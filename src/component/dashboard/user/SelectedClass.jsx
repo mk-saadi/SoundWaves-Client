@@ -10,7 +10,7 @@ const SelectedClass = () => {
     const [cla, setCla] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const url = `http://localhost:12000/selected?email=${user?.email}`;
+    const url = `https://sound-waves-taupe.vercel.app/selected?email=${user?.email}`;
 
     useEffect(() => {
         setLoading(true);
@@ -31,7 +31,7 @@ const SelectedClass = () => {
 
         if (confirmDelete) {
             axios
-                .delete(`http://localhost:12000/selected/${id}`)
+                .delete(`https://sound-waves-taupe.vercel.app/selected/${id}`)
                 .then((response) => {
                     console.log(response);
                     setCla(cla.filter((cl) => cl._id !== id));
@@ -77,7 +77,7 @@ const SelectedClass = () => {
                                     </td>
                                     <td>${cl.price}</td>
                                     <td>
-                                        <Link>
+                                        <Link to={`/dashboard/payment/${cl._id}`}>
                                             <button className="btn bg-green-500 border-green-500 hover:bg-green-500 hover:border-green-500 border-2 btn-xs sm:btn-sm rounded-full text-white text-xs flex justify-center items-center gap-2 flex-nowrap">
                                                 Pay <MdPayments className="text-lg" />
                                             </button>

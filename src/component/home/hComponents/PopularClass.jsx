@@ -6,7 +6,7 @@ const PopularClass = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:12000/classes")
+            .get("https://sound-waves-taupe.vercel.app/classes")
             .then((response) => {
                 setPopularClasses(response.data);
             })

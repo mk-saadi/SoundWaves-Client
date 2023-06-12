@@ -33,7 +33,7 @@ const AdminHome = () => {
     }, []);
 
     const handleMakeAdmin = (user) => {
-        fetch(`http://localhost:12000/users/admin/${user._id}`, {
+        fetch(`https://sound-waves-taupe.vercel.app/users/admin/${user._id}`, {
             method: "PATCH",
         })
             .then((res) => res.json())
@@ -58,7 +58,7 @@ const AdminHome = () => {
     };
 
     const handleMakeInstructor = (user) => {
-        fetch(`http://localhost:12000/users/instructor/${user._id}`, {
+        fetch(`https://sound-waves-taupe.vercel.app/users/instructor/${user._id}`, {
             method: "PATCH",
         })
             .then((res) => res.json())
@@ -182,10 +182,10 @@ const AdminHome = () => {
                                             <button
                                                 disabled={user.role === "admin"}
                                                 onClick={() => handleMakeInstructor(user)}
-                                                className={`bg-white rounded-full text-gray-600 md:text-sm font-semibold px-4 py-px w-fit focus:scale-95 duration-150 text-xs ${
+                                                className={`rounded-full text-gray-600 md:text-sm font-semibold px-4 py-px w-fit focus:scale-95 duration-150 text-xs ${
                                                     user.role === "admin"
                                                         ? "cursor-not-allowed select-none bg-gray-500"
-                                                        : ""
+                                                        : "bg-white"
                                                 }`}
                                             >
                                                 Instructor?
