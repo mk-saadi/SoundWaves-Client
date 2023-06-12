@@ -184,7 +184,7 @@ const AdminHome = () => {
                                                 onClick={() => handleMakeInstructor(user)}
                                                 className={`bg-white rounded-full text-gray-600 md:text-sm font-semibold px-4 py-px w-fit focus:scale-95 duration-150 text-xs ${
                                                     user.role === "admin"
-                                                        ? "cursor-not-allowed select-none bg-gray-400"
+                                                        ? "cursor-not-allowed select-none bg-gray-500"
                                                         : ""
                                                 }`}
                                             >

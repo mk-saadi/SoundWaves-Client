@@ -84,13 +84,19 @@ const Dashboard = () => {
                             </>
                         ) : (
                             <>
-                                <NavLink to="/dashboard/selectedClass">
+                                <NavLink
+                                    to="/dashboard/selectedClass"
+                                    className="bg-transparent my-2"
+                                >
                                     <button className="flex justify-evenly items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full border-l-4">
                                         <SiGoogleclassroom className="text-2xl" />
                                         Selected Class
                                     </button>
                                 </NavLink>
-                                <NavLink to="/dashboard/myClasses">
+                                <NavLink
+                                    to="/dashboard/enrolledClass"
+                                    className="bg-transparent my-2"
+                                >
                                     <button className="flex justify-evenly items-center gap-3 rounded-sm bg-accent py-3 px-4 font-semibold w-full border-l-4">
                                         <SiGoogleclassroom className="text-2xl" />
                                         My Classes

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import axios from "axios";
 
 const PopularClass = () => {
     const [popularClasses, setPopularClasses] = useState([]);
@@ -15,9 +14,6 @@ const PopularClass = () => {
                 console.error("Error fetching popular classes:", error);
             });
     }, []);
-    console.log(popularClasses);
-
-    // axios("http://localhost:12000/classes");
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -35,7 +31,7 @@ const PopularClass = () => {
                             className="md:h-96 md:w-72 sm:h-64 sm:w-auto h-72 w-96 object-cover grayscale  pointer-events-none block mx-auto rounded-md"
                         />
                         <div>
-                            <p className="absolute font-semibold sm:top-28 md:top-64 bg-gray-700 text-gray-300 text-3xl left-0 px-2 py-4 top-52 shadow-md drop-shadow-md  -skew-y-3">
+                            <p className="absolute font-semibold sm:top-28 md:top-64 bg-gray-700 text-gray-300 text-3xl left-0 px-2 py-4 top-40 shadow-md drop-shadow-md bg-opacity-90 -skew-y-3">
                                 {classes.className}
                             </p>
                             <p className="text-gray-400 text-lg">

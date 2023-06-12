@@ -19,6 +19,7 @@ import MyClasses from "./component/dashboard/instructor/MyClasses";
 import SelectedClass from "./component/dashboard/user/SelectedClass";
 import AllClasses from "./component/extra/AllClasses";
 import FamousInstructor from "./component/extra/FamousInstructor";
+import EnrolledClass from "./component/dashboard/user/EnrolledClass";
 
 const queryClient = new QueryClient();
 
@@ -74,6 +75,7 @@ const router = createBrowserRouter([
                     </AdminRoutes>
                 ),
             },
+            // instructor
             {
                 path: "instructorHome",
                 element: (
@@ -90,9 +92,14 @@ const router = createBrowserRouter([
                     </InstructorRoutes>
                 ),
             },
+            // user
             {
                 path: "selectedClass",
                 element: <SelectedClass />,
+            },
+            {
+                path: "enrolledClass",
+                element: <EnrolledClass />,
             },
         ],
     },

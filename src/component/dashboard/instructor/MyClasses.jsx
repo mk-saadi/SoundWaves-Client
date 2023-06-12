@@ -1,7 +1,7 @@
 const MyClasses = () => {
     return (
         <div>
-            <p>my classes</p>
+            <p>instructor my classes</p>
         </div>
     );
 };
