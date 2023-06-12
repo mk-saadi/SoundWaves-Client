@@ -44,8 +44,14 @@ const SelectedClass = () => {
     };
 
     return (
-        <>
-            <p>{total}</p>
+        <div className="ml-0 sm:ml-8 lg:ml-0">
+            <div className="border-2">
+                <img
+                    src={user.photoURL}
+                    alt=""
+                    className="w-28 h-auto rounded-full p-1 drop-shadow-md shadow-md ml-8  border-gradient"
+                />
+            </div>
             <div className="overflow-x-auto min-h-screen mx-auto">
                 {loading ? (
                     <div className="flex items-center justify-center h-screen">
@@ -97,7 +103,7 @@ const SelectedClass = () => {
                     </table>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 
