@@ -42,6 +42,7 @@ const router = createBrowserRouter([
             {
                 path: "/allClasses",
                 element: <AllClasses />,
+                loader: () => fetch("http://localhost:12000/classes"),
             },
             {
                 path: "/famousInstructor",

@@ -65,7 +65,7 @@ const Banner = () => {
                                             fontWeight: "bold",
                                         }}
                                     >
-                                        Our Instructors
+                                        View classes
                                     </Button>
                                 </Link>
                                 <Link>
@@ -73,7 +73,7 @@ const Banner = () => {
                                         className="btn font-semibold bg-gradient-to-r from-sky-400 to-sky-600 rounded-full text-white shadow-md drop-shadow-md duration-200 uppercase"
                                         sx={{ color: "white", fontWeight: "bold" }}
                                     >
-                                        View classes
+                                        Our Instructors
                                     </Button>
                                 </Link>
                             </div>
